@@ -1,0 +1,56 @@
+h1, h2, h3 {
+  font-weight: normal;
+  color: #562457;
+  margin-bottom: 15px;
+}
+
+a, a > code {
+  color: #88398a;
+}
+.remark-code-line-highlighted { background-color: rgba(136, 57, 138, 0.3); }
+
+.inverse {
+  background-color: #562457;
+}
+
+.inverse, .inverse h1, .inverse h2, .inverse h3, .inverse a, inverse a > code {
+  color: #fff;
+}
+
+.remark-inline-code  {
+	padding: .2em .4em;
+	margin: 0;
+	font-size: 85%;
+	background-color: rgb(217, 217, 217);
+	border-radius: 6px;
+}
+
+a {
+  font-weight: bold;
+  color: #4d484b;
+}
+
+
+.remark-slide-content {
+	font-size: 1.4rem;
+}
+
+
+strong{
+  font-weight: bold;
+}
+
+li {
+	font-size: 1.2rem;
+}
+
+
+.tiny .remark-code-line { /*Change made here*/
+  font-size: 90% !important;
+}
+
+
+.fullslide img {
+  margin-top: -85px;
+  margin-left: -60px;
+}

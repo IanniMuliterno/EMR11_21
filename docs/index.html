@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Uma conversa entre o R e o Power BI</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Adriana Letícia dos Reis" />
+    <meta name="author" content="Eliana Rigoni" />
+    <meta name="author" content="Ianní Muliterno" />
+    <meta name="author" content="Regina Albanese Pose" />
+    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/rladies-fonts.css" rel="stylesheet" />
+    <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view-0.2.6/tile-view.js"></script>
+    <link href="libs/animate.css-3.7.2/animate.xaringan.css" rel="stylesheet" />
+    <link href="libs/tachyons-4.12.0/tachyons.min.css" rel="stylesheet" />
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"xc4d79c9061a4b5eb2f88be1879da5d2","expires":1}</script>
+    <script src="libs/himalaya-1.1.0/himalaya.js"></script>
+    <script src="libs/js-cookie-3.0.0/js.cookie.js"></script>
+    <link href="libs/editable-0.2.6/editable.css" rel="stylesheet" />
+    <script src="libs/editable-0.2.6/editable.js"></script>
+    <script src="libs/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-clipboard-0.2.6/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"Copy Code","success":"Copied!","error":"Press Ctrl+C to Copy"})</script>
+    <script src="libs/xaringanExtra_fit-screen-0.2.6/fit-screen.js"></script>
+    <link href="libs/xaringanExtra-extra-styles-0.2.6/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="rladies.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Uma conversa entre o R e o Power BI
+## RLadies São Paulo
+### Adriana Letícia dos Reis<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>
+### Eliana Rigoni<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
+### Ianní Muliterno<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>
+### Regina Albanese Pose<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>
+### 29/11/2021
+
+---
+
+
+
+
+## Workshop oferecido por:
+
+
+&lt;img src="https://beatrizmilz.github.io/slidesR/introR/img/rainbow-inclusive.png" width="60%" style="display: block; margin: auto;" /&gt;
+
+&lt;br&gt; [R-Ladies São Paulo](https://www.meetup.com/rladies-sao-paulo/)
+
+
+---
+.pull-left[
+### [Adriana dos Reis]( https://www.linkedin.com/in/reis-al/)
+- Bacharel em Sistema de Informação - Mackenzie
+- MBA Economia e Gestão Empresarial - FGV
+
+### [Eliana Rigoni](https://www.linkedin.com/in/elianarigoni/?originalSubdomain=br)
+- Bacharel em ADM - FACAMP
+- Analista de Dados – IGTI 
+- MBA ESALQ USP - cursando
+
+]
+
+.pull-right[
+### [Ianní Muliterno](https://www.linkedin.com/in/iannimuliterno/)
+- Cientista de dados na Unilever
+- Bacharel em Estatística - UFPE
+
+
+### [Regina Albanese Pose](https://www.linkedin.com/in/regina-albanese-pose-2300b4110/)
+- Licenciada em Matemática - FSA
+- Psicopedagoga clínica e institucional/lato sensu – São Marcos 
+- Mestre em Ciências FMUSP
+- Especialista em Poluição atmosférica e saúde humana/lato sensu – FMUSP
+- Bacharel em Estatística - UNICAPITAL
+]
+
+
+---
+
+# Proposta
+## Dia 1
+- Ferramentas importantes no dia-a-dia 
+
+--
+
+- Solução passo-a-passo de um case mostrando boas práticas no contexto _Mercado de trabalho_ 
+
+--
+
+- link com o Power.BI 
+
+
+
+
+---
+
+# Fluxo de trabalho na ciência de dados
+&lt;img src="data-science-workflow.png" width="2560" style="display: block; margin: auto;" /&gt;
+---
+
+# Fluxo de trabalho na ciência de dados com Tidyverse
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="01_tidyverse_data_science.png" alt="&amp;lt;center&amp;gt;&amp;lt;b&amp;gt;Fonte: Olivier Gimenez  &amp;lt;a href='https://oliviergimenez.github.io/intro_tidyverse/#1'&amp;gt; Introduction to the Tidyverse&amp;lt;/a&amp;gt; &amp;lt;/b&amp;gt;&amp;lt;/center&amp;gt;" width="80%" /&gt;
+&lt;p class="caption"&gt;&lt;center&gt;&lt;b&gt;Fonte: Olivier Gimenez  &lt;a href='https://oliviergimenez.github.io/intro_tidyverse/#1'&gt; Introduction to the Tidyverse&lt;/a&gt; &lt;/b&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+---
+
+#Introdução 
+
+##Telco Churn Analysis
+
+- [Base](https://www.kaggle.com/blastchar/telco-customer-churn?select=WA_Fn-UseC_-Telco-Customer-Churn.csv): Informações dos consumidores da Telco - telecomunicações 
+
+--
+
+- Objetivo: Prever comportamento do consumidor ações em prol de mante-los. 
+
+
+
+---
+# Contextualização
+
+* O que é Churn 
+             
+
+* churn da perspectiva da companhia  
+
+  churn no nosso caso é deixar a empresa, então _o que a empresa pode fazer para reduzir a probabilidade do cliente sair da empresa? (churn) (melhorar areas que são importantes para o consumidor)_
+
+* churn da perspectiva do cliente          
+
+  _correlação entre churn e atributos do cliente ( identificar indicadores relacionados com o churn_
+---
+# Próximos passos
+
+
+- Dataprep
+
+- Análise exploratória
+
+---
+#Visão geral da base
+
+```
+## 'data.frame':	5543 obs. of  21 variables:
+##  $ customerID      : chr  "b5dbfb" "1577b3" "ca0487" "fe7284" ...
+##  $ gender          : chr  "Male" "Male" "Male" "Female" ...
+##  $ SeniorCitizen   : int  0 0 1 0 0 0 0 0 1 0 ...
+##  $ Partner         : chr  "Yes" "No" "No" "Yes" ...
+##  $ Dependents      : chr  "Yes" "No" "No" "Yes" ...
+##  $ tenure          : int  68 18 65 52 37 63 71 64 30 40 ...
+##  $ PhoneService    : chr  "No" "Yes" "Yes" "Yes" ...
+##  $ MultipleLines   : chr  "No phone service" "Yes" "Yes" "Yes" ...
+##  $ InternetService : chr  "DSL" "DSL" "Fiber optic" "Fiber optic" ...
+##  $ OnlineSecurity  : chr  "Yes" "Yes" "Yes" "No" ...
+##  $ OnlineBackup    : chr  "Yes" "No" "No" "No" ...
+##  $ DeviceProtection: chr  "No" "Yes" "Yes" "Yes" ...
+##  $ TechSupport     : chr  "No" "No" "Yes" "No" ...
+##  $ StreamingTV     : chr  "Yes" "Yes" "Yes" "Yes" ...
+##  $ StreamingMovies : chr  "No" "No" "Yes" "Yes" ...
+##  $ Contract        : chr  "One year" "Month-to-month" "Two year" "One year" ...
+##  $ PaperlessBilling: chr  "No" "No" "Yes" "No" ...
+##  $ PaymentMethod   : chr  "Mailed check" "Mailed check" "Electronic check" "Bank transfer (automatic)" ...
+##  $ MonthlyCharges  : num  44.8 69.5 110.3 101.2 19.8 ...
+##  $ TotalCharges    : num  2984 1199 7246 5301 695 ...
+##  $ Churn           : chr  "No" "No" "No" "No" ...
+## NULL
+```
+
+---
+#Análise Exploratória
+
+
+&lt;img src="index_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
+---
+&lt;img src="index_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
+---
+#Análise Exploratória 
+
+Cuidado com a escala
+
+&lt;img src="index_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
+---
+#Análise Exploratória
+
+```r
+mc_plot &lt;- dt %&gt;%
+  select_if(is.numeric) %&gt;%
+  ggplot(aes(x = MonthlyCharges)) +
+  geom_histogram()+
+  ggtitle('Monthly Charges')+
+* theme_minimal()
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-10-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+#Análise Exploratória 
+
+
+
+
+```r
+  dt %&gt;%
+* ggplot(aes(x = MonthlyCharges, fill  = InternetService)) +
+  facet_wrap(vars(Churn)) +
+  geom_histogram(alpha = 0.5)+
+  ggtitle('Monthly Charges vs Churn') +
+  theme_minimal()
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-12-1.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+
+---
+#Análise Exploratória
+
+&lt;img src="index_files/figure-html/unnamed-chunk-13-1.png" style="display: block; margin: auto;" /&gt;
+
+
+
+---
+## IV e WOE
+
+  Validando as evidências de poder preditivo 
+  - Bins
+  - weight of evidence
+  $$
+  WOE = \ln(\frac{\% de\underline\ não\underline\ eventos}{\% de\underline\ eventos})
+  $$
+  - Information Value
+  $$
+  IV = \sum(\%de\underline não\underline\ eventos - \% de\underline\ eventos) * WOE
+  $$
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; IV &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; Predictive power &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; &amp;lt; 0.02 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; useless for prediction &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 0.02 - 0.1 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; weak predictor &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 0.1 - 0.3 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; medium predictor &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; 0.3 - 0.5 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; strong predictor &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; &amp;gt; 0.5 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; suspicious or too good &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+---
+
+
+```r
+categoricas &lt;- dt %&gt;%
+  mutate(SeniorCitizen = as.character(SeniorCitizen),
+         churn_binario = as.character(ifelse(Churn == 'Yes',0,1))) %&gt;%
+  select_if(is.character) %&gt;%
+  select(-customerID,-Churn)
+
+
+num_to_cat &lt;- dt %&gt;%
+  select_if(is.numeric) %&gt;%
+  select(-1) %&gt;%
+  mutate(across(everything(),~cut(.x,breaks=5)))
+
+names(num_to_cat)
+```
+
+```
+## [1] "tenure"         "MonthlyCharges" "TotalCharges"
+```
+
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; tenure &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; n_2 &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; monthly_charges &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; n_4 &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; total_charges &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; n_6 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (-0.072,14.4] &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1872 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; (18.1,38.3] &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1453 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; (10.1,1.75e+03] &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3115 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (14.4,28.8] &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 872 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; (38.3,58.4] &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 789 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; (1.75e+03,3.49e+03] &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 902 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (28.8,43.2] &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 766 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; (58.4,78.5] &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1043 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; (3.49e+03,5.22e+03] &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 677 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (43.2,57.6] &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 747 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; (78.5,98.6] &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1422 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; (5.22e+03,6.95e+03] &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 562 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (57.6,72.1] &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1286 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; (98.6,119] &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 836 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; (6.95e+03,8.69e+03] &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 277 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+#IV para todas as variáveis
+
+
+&lt;img src="index_files/figure-html/unnamed-chunk-18-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# WOE - entendendo impacto das variáveis
+&lt;img src="index_files/figure-html/unnamed-chunk-19-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+#Perfil do Churner 
+Com o resultado da análise exploratória bem comunicado é possível estruturar "O que esperar" e validar isso com seu _cliente_.
+
+### Neste caso, podemos esperar que um churner em potencial: 
+- Contrato mês-a-mês 
+- Paga com cheque eletrônico 
+- Tem pagamento mensal superior a $58,4 
+- Internet Service: Fibra ótica 
+- Não se interessa por serviços adicionais (aprofundar essa afirmação pode ser interessante)
+
+
+---
+##compreensibilidade do modelo
+
+###modelos acurados  
+
+Fornecem indicadores mais precisos, desta forma, pode representar maior lucro. 
+
+Mas se você não pode explicar...
+
+&lt;img src="everyone_happy.png" width="45%" style="display: block; margin: auto;" /&gt;
+
+---
+##compreensibilidade do modelo 
+
+###modelos compreensíveis 
+
+Faz sentido para o negócio (consumidor do modelo) 
+
+Promove confiança e facilita a aceitação
+
+&lt;img src="cheers.png" width="50%" style="display: block; margin: auto;" /&gt;
+
+---
+#Modelos de predição para Churn  
+
+
+* arvores de decisão 
+
+  - Basicamente uma sequência de regras 
+  - aplicação principal: Classificação 
+  - Interpretável, mas sensível a assimetria da variável resposta e condições de variáveis categóricas de entrada, por exemplo. 
+
+--
+
+* regressão logistica  
+
+  - Modelo estatístico bem difundido
+  - Aplicação principal: Classificação
+  - Interpretável e mais robusto. 
+
+--
+
+* SVM 
+
+  - Pouco interpretável 
+  - Acurado 
+  - Robusto 
+
+
+---
+
+* Redes Bayesianas 
+
+  - Interpretável porém pouco difundido 
+  - Acurado 
+  - Robusto 
+
+--
+* análise de sobrevivência 
+
+  - Interpretável porém tem sua complexidade 
+  - Possibilidade considerar tempo como uma variável. 
+
+--
+* xgboost (o popular) 
+
+  - Robusto 
+  - Acurado 
+  - Hoje possui boas ferramentas de interpretação 
+
+---
+#processo de predição de churn
+
+1 - o que é o churn nesse caso ( exemplo, loja online, o cliente para de comprar... mas pode apenas ter paraddo, x dias sem compra, y dias sem ligacao) 
+
+2 - separar os grupos de treino e teste 
+
+3 - buscando a maxima performance do modelo 
+
+4 - direcionando ação 
+
+---
+#Dummyficação
+
+```r
+leng_vars &lt;- sapply(dt,
+                        function(x) ifelse(is.character(x),n_distinct(x),NA))
+
+leng_vars &lt;- leng_vars[!is.na(leng_vars)]
+
+categoricas &lt;- dt %&gt;%
+     select_if(is.character) %&gt;%
+     select(names(leng_vars[leng_vars &gt; 2])) %&gt;%
+   #  select(-customerID,-Churn)
+    select(-customerID)
+
+dummy &lt;- dummyVars(" ~ .", data=categoricas)
+newdata &lt;- data.frame(predict(dummy, newdata = categoricas))
+
+numericas &lt;- dt %&gt;%
+  select_if(is.numeric)
+
+entrada_xgb &lt;- bind_cols(newdata,numericas)
+entrada_xgb &lt;- janitor::clean_names(entrada_xgb)
+```
+Replicar o mesmo tratamento para teste (idealmente, trate antes, divida depois)
+
+
+---
+#Modelando com xgboost
+DMatrix
+
+```r
+index_treino &lt;- sample(1:nrow(entrada_xgb),nrow(entrada_xgb)*0.75)
+
+ treino &lt;- entrada_xgb[index_treino,]
+validacao &lt;- entrada_xgb[-index_treino,]
+
+treino &lt;- xgb.DMatrix(as.matrix(treino)
+                      , label = ifelse(dt$Churn[index_treino] == 'Yes',1,0)
+                      )
+
+validacao &lt;- xgb.DMatrix(as.matrix(validacao)
+                      , label = ifelse(dt$Churn[-index_treino] == 'Yes',1,0)
+)
+
+
+
+teste &lt;- xgb.DMatrix(as.matrix(teste_xgb)
+)
+```
+---
+#Regularização 
+
+- Muitas variáveis 
+
+- Poucas observações 
+
+- ambos...
+
+&lt;div class="figure" style="text-align: center"&gt;
+&lt;img src="https://github.com/allisonhorst/stats-illustrations/raw/master/other-stats-artwork/dragon_residual.png" alt="&amp;lt;center&amp;gt;&amp;lt;b&amp;gt;Fonte: Allison Horst  &amp;lt;a href='https://github.com/allisonhorst/stats-illustrations'&amp;gt; Understanding residuals&amp;lt;/a&amp;gt; &amp;lt;/b&amp;gt;&amp;lt;/center&amp;gt;" width="70%" /&gt;
+&lt;p class="caption"&gt;&lt;center&gt;&lt;b&gt;Fonte: Allison Horst  &lt;a href='https://github.com/allisonhorst/stats-illustrations'&gt; Understanding residuals&lt;/a&gt; &lt;/b&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;/div&gt;
+---
+#Regularização
+- Ridge regression ou regularização L2 
+  Usa o quadrado do coeficiente como penalidade ( note que `\(\lambda = 0\)` representa MQO) 
+  
+`$$\sum_{i=1}^n(y_i - \sum_{j=1}^px_{ij}\beta_j)^2 + \lambda\sum_{j=1}^p\beta_j^2$$`
+- Lasso regression ou regularização L1 
+
+  Usa o valor absoluto como penalidade  
+  
+`$$\sum_{i=1}^n(y_i - \sum_{j=1}^px_{ij}\beta_j)^2 + \lambda\sum_{j=1}^p|\beta_j|$$`  
+
+---
+#Regularização com Xgboost
+
+```r
+dt %&gt;%
+  summarise( sum(Churn == 'No')/sum(Churn == 'Yes'))
+```
+
+```
+##   sum(Churn == "No")/sum(Churn == "Yes")
+## 1                               2.760516
+```
+
+```r
+watchlist &lt;- list(train = treino, eval = validacao)
+parametros = list(
+  max_depth = 3,
+  eta = 0.15,
+  colsample_bytree = 1,
+  subsample = 1,
+  objective = "binary:logistic",
+  eval_metric = 'auc',
+  scale_pos_weight = 2.76)
+
+modelo &lt;- xgb.train(data = treino,
+                    nrounds = 20,
+                    params = parametros,
+                  watchlist)
+```
+
+```
+## [1]	train-auc:0.824866	eval-auc:0.805865 
+## [2]	train-auc:0.830431	eval-auc:0.812493 
+## [3]	train-auc:0.842469	eval-auc:0.822613 
+## [4]	train-auc:0.844460	eval-auc:0.822220 
+## [5]	train-auc:0.847461	eval-auc:0.827102 
+## [6]	train-auc:0.848075	eval-auc:0.828210 
+## [7]	train-auc:0.851492	eval-auc:0.826937 
+## [8]	train-auc:0.852117	eval-auc:0.826856 
+## [9]	train-auc:0.854817	eval-auc:0.829722 
+## [10]	train-auc:0.855645	eval-auc:0.830632 
+## [11]	train-auc:0.856346	eval-auc:0.830890 
+## [12]	train-auc:0.856703	eval-auc:0.830799 
+## [13]	train-auc:0.857606	eval-auc:0.830971 
+## [14]	train-auc:0.859296	eval-auc:0.831102 
+## [15]	train-auc:0.860013	eval-auc:0.829993 
+## [16]	train-auc:0.861551	eval-auc:0.829942 
+## [17]	train-auc:0.862294	eval-auc:0.830580 
+## [18]	train-auc:0.863357	eval-auc:0.830905 
+## [19]	train-auc:0.864643	eval-auc:0.831072 
+## [20]	train-auc:0.865001	eval-auc:0.831149
+```
+
+O hiperparâmetro [scale_pos_weight](https://xgboost.readthedocs.io/en/latest/parameter.html)
+---
+
+
+--- 
+#Avaliando performance 
+
+* ROC/auc - significa verdadeiros positivos vs falso positivo 
+
+* lift metric 
+
+* expected maximum profit measure - usa estivativa para valor do consumidor ajuda a entregar o treshhold otimo e o lucro esperado na situação atual 
+---
+#Avaliando Performance
+&lt;img src="index_files/figure-html/unnamed-chunk-28-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+---
+#Avaliando Performance - ROC/AUC
+&lt;img src="index_files/figure-html/unnamed-chunk-29-1.png" style="display: block; margin: auto;" /&gt;
+---
+#Youden index 
+
+- Índice de melhor trade off entre sensibilidade `\(P(\hat{y}=1|y=1)\)` e especificidade `\(P(\hat{y}=0|y=0)\)` 
+
+`$$J = max_c(Sensibilidade_c + especificidade_c -1)$$`
+
+```r
+ library(ROCit)
+ ROCit_obj &lt;- rocit(score=treino_pred,class=dt[index_treino,]$Churn)
+```
+---
+#Avaliando Performance - Lift Metric
+
+
+- Métrica popular no marketing 
+- Auxilia no planejamento de ações (aplicável a soluções de classificação no geral)
+&lt;img src="index_files/figure-html/unnamed-chunk-32-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+##Avaliando Performance - Lift Metric 
+
+- A partir do plot de lift com a base de validação é possível direcionar uma ação e mensurar resultado
+
+```
+##    faixa     inicio        fim total bad_rate        perc
+## 1      1 0.04437318 0.05981155   134        5 0.037313433
+## 2      2 0.05981155 0.10392234   142        1 0.007042254
+## 3      3 0.10392234 0.16863815   140        5 0.035714286
+## 4      4 0.16863815 0.26442173   137       12 0.087591241
+## 5      5 0.26442173 0.37577112   140       28 0.200000000
+## 6      6 0.37577112 0.47332871   139       28 0.201438849
+## 7      7 0.47332871 0.58004254   127       42 0.330708661
+## 8      8 0.58004254 0.69019544   147       54 0.367346939
+## 9      9 0.69019544 0.79459023   141       82 0.581560284
+## 10    10 0.79459023 0.90328763   139       98 0.705035971
+```
+
+```
+## # A tibble: 2 x 2
+##   Churn `mean(MonthlyCharges)`
+##   &lt;chr&gt;                  &lt;dbl&gt;
+## 1 No                      60.9
+## 2 Yes                     74.3
+```
+---
+#SHAP
+
+Interpretador de modelos que combina teoria dos jogos e alocação ótima de crédito. 
+
+- Shapley values, por Lloyd Shapley (Nobel de economia). Avalia contribuição de cada jogador, dado um jogo cooperativo e uma aliança de jogadores, sendo capaz de estimar uma "distribuição justa" dos ganhos para cada um.
+
+&lt;img src="shapleyvalues.png" width="683" style="display: block; margin: auto;" /&gt;
+
+- Lida com multicolinearidade. (considera todos os subconjuntos em todas as ordens possíveis)
+---
+#SHAP 
+
+- Eis que você tem um modelo, dando bons resultados e em produção 
+
+- Então um cliente aparentemente satisfeito é avaliado
+
+&lt;img src="with_boss1.png" width="1600" style="display: block; margin: auto;" /&gt;
+--
+
+- Existe uma coisa que o chefe quer saber
+&lt;img src="with_boss2.png" width="1600" style="display: block; margin: auto;" /&gt;
+---
+#SHAP
+&lt;img src="shap_flow1.png" width="1600" style="display: block; margin: auto;" /&gt;
+--
+&lt;img src="shap_flow2.png" width="1600" style="display: block; margin: auto;" /&gt;
+--
+&lt;img src="shap_flow3.png" width="1600" style="display: block; margin: auto;" /&gt;
+---
+#SHAP
+&lt;img src="shap_flow4.png" width="1600" style="display: block; margin: auto;" /&gt;
+--
+&lt;img src="shap_flow5.png" width="1600" style="display: block; margin: auto;" /&gt;
+--
+&lt;img src="shap_flow6.png" width="1600" style="display: block; margin: auto;" /&gt;
+---
+## Resumo
+
+- Ferramentas facilitadoras 
+
+- Boas práticas/ Escolhendo como fazer 
+
+- Traduzindo resultados 
+
+- "Comunicação preventiva"
+
+---
+
+## Referências/Pacotes interessantes
+
+### Aumentando as possibilidades!
+
+- [Como mentir com Estatística](https://www3.unicentro.br/petfisica/2020/04/22/resenha-como-mentir-com-estatisticas/) 
+
+- [Artigo SHAP](https://proceedings.neurips.cc//paper/2017/file/8a20a8621978632d76c43dfd28b67767-Paper.pdf) 
+
+- [Data to viz](https://www.data-to-viz.com/) 
+
+- [kableExtra](https://bookdown.org/yihui/rmarkdown-cookbook/kableextra.html) 
+
+- [ggthemes](https://ggplot2.tidyverse.org/reference/ggtheme.html)
+
+- [ggExtra](https://deanattali.com/2015/03/29/ggExtra-r-package/) 
+
+- [formatR](https://yihui.org/formatr/)
+
+- [clipr](https://github.com/mdlincoln/clipr)
+
+---
+#Muchas Gracias
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="libs/remark-latest.min.js"></script>
+<script src="./macro/macros.js"></script>
+<script>var slideshow = remark.create({
+"highlightLines": true,
+"highlightStyle": "github",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
