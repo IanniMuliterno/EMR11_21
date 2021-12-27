@@ -26,5 +26,6 @@ Ministrado por :
 - Tema: Modelagem de Churn + Continuação de desenvolvimento no Power BI com dias usando R.
 - Materiais: [Slides](https://iannimuliterno.github.io/EMR11_21/docs/index.html), 
 [Script](https://github.com/IanniMuliterno/EMR11_21/blob/main/envio_EMR/pratica_EMR_112021.R),
-[arquivo pbix](https://github.com/IanniMuliterno/EMR11_21/blob/main/docs/PBI_escola_regressao_versaofinal.pbix)
+[arquivo pbix](https://github.com/IanniMuliterno/EMR11_21/blob/main/docs/PBI_escola_regressao_versaofinal.pbix),
+[carta para UCSC](https://iannimuliterno.github.io/EMR11_21/carta_uscs.pdf)
 
